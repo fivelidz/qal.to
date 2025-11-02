@@ -1,0 +1,48 @@
+{
+  "version": "1.0",
+  "last_updated": "2025-11-02T00:00:00Z",
+  "models": [
+    {
+      "id": "llama-3.3-70b-q4",
+      "name": "Llama 3.3 70B Instruct",
+      "organization": "Meta",
+      "parameters": "70.5B",
+      "quantization": "Q4_K_M",
+      "size_gb": 40.2,
+      "context_length": 128000,
+      "magnet": "AWAITING_FIRST_SUBMISSION",
+      "info_hash": "",
+      "sha256": "",
+      "uploaded": "2025-11-02",
+      "uploader": "qalarc_official",
+      "verified": true,
+      "trust_level": "official",
+      "seeders": 0,
+      "leechers": 0,
+      "downloads": 0,
+      "tags": ["chat", "reasoning", "code", "instruct"],
+      "hardware_compat": {
+        "qalarc_256gb": {
+          "compatible": true,
+          "tokens_sec": 35,
+          "notes": "Runs smoothly on Professional system"
+        },
+        "qalarc_512gb": {
+          "compatible": true,
+          "tokens_sec": 45,
+          "notes": "Excellent performance on Production system"
+        }
+      },
+      "source_url": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
+      "description": "Meta's Llama 3.3 70B Instruct model, quantized to Q4_K_M for efficient local inference. Excellent for chat, reasoning, and code generation tasks.",
+      "status": "pending_torrent",
+      "notes": "Awaiting community torrent creation. See TORRENT_CREATION_GUIDE.md"
+    }
+  ],
+  "stats": {
+    "total_models": 1,
+    "total_size_tb": 0.04,
+    "total_downloads": 0,
+    "active_seeders": 0
+  }
+}

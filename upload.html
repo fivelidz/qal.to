@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upload Model Torrent - Qal.to</title>
+
+    <style>
+        @font-face {
+            font-family: 'JetBrains Mono';
+            src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2');
+            font-display: swap;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a15;
+            --bg-accent: #151520;
+            --text-primary: #e8e8e8;
+            --text-secondary: #c0c0c0;
+            --accent-orange: #ff9f1c;
+            --accent-cyan: #00d9ff;
+            --accent-green: #5a7a5a;
+            --border: #2a2a35;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid var(--accent-orange);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .upload-section {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-left: 4px solid var(--accent-orange);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+        }
+
+        .section-title {
+            color: var(--accent-orange);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="url"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .help-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+
+        button {
+            background: var(--accent-orange);
+            color: var(--bg-primary);
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .warning-box {
+            background: rgba(255, 159, 28, 0.1);
+            border-left: 4px solid var(--accent-orange);
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .success-box {
+            background: rgba(90, 122, 90, 0.2);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .code-block {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .tag-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-size: 0.85rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            color: var(--accent-orange);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Browse</a>
+
+        <header>
+            <h1>Upload Model Torrent</h1>
+            <p class="subtitle">Share quantized AI models with the community</p>
+        </header>
+
+        <div class="warning-box">
+            <strong>⚠️ Important Guidelines:</strong>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li>Only upload models you have the right to distribute</li>
+                <li>Ensure models are properly quantized GGUF format</li>
+                <li>Verify checksums match source (HuggingFace, etc.)</li>
+                <li>Must seed for at least 30 days after upload</li>
+                <li>New uploaders go through verification queue</li>
+            </ul>
+        </div>
+
+        <div class="success-box" id="successBox">
+            <strong>✅ Submission Received!</strong>
+            <p>Your torrent has been submitted for review. New uploaders are verified within 24-48 hours.</p>
+            <p>Keep seeding to ensure availability!</p>
+        </div>
+
+        <form id="uploadForm">
+            <!-- Model Information -->
+            <div class="upload-section">
+                <h2 class="section-title">Model Information</h2>
+
+                <div class="form-group">
+                    <label for="modelName">Model Name *</label>
+                    <input type="text" id="modelName" name="modelName" required placeholder="e.g., Llama 3.3 70B Instruct Q4_K_M">
+                    <div class="help-text">Full model name including quantization level</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="organization">Organization/Creator</label>
+                    <input type="text" id="organization" name="organization" placeholder="e.g., Meta, Mistral, TheBloke">
+                </div>
+
+                <div class="form-group">
+                    <label for="parameters">Parameters</label>
+                    <input type="text" id="parameters" name="parameters" placeholder="e.g., 70.5B, 7B, 405B">
+                </div>
+
+                <div class="form-group">
+                    <label for="quantization">Quantization Level *</label>
+                    <select id="quantization" name="quantization" required>
+                        <option value="">Select quantization...</option>
+                        <option value="Q2_K">Q2_K (2-bit)</option>
+                        <option value="Q3_K_S">Q3_K_S (3-bit small)</option>
+                        <option value="Q3_K_M">Q3_K_M (3-bit medium)</option>
+                        <option value="Q3_K_L">Q3_K_L (3-bit large)</option>
+                        <option value="Q4_K_S">Q4_K_S (4-bit small)</option>
+                        <option value="Q4_K_M">Q4_K_M (4-bit medium)</option>
+                        <option value="Q4_K_L">Q4_K_L (4-bit large)</option>
+                        <option value="Q5_K_S">Q5_K_S (5-bit small)</option>
+                        <option value="Q5_K_M">Q5_K_M (5-bit medium)</option>
+                        <option value="Q6_K">Q6_K (6-bit)</option>
+                        <option value="Q8_0">Q8_0 (8-bit)</option>
+                        <option value="FP16">FP16 (16-bit float)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fileSize">File Size (GB) *</label>
+                    <input type="number" id="fileSize" name="fileSize" step="0.1" required placeholder="e.g., 40.5">
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Tags (select all that apply)</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="tags" value="chat" id="tag-chat">
+                        <label for="tag-chat">Chat</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="tags" value="code" id="tag-code">
+                        <label for="tag-code">Code</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="tags" value="reasoning" id="tag-reasoning">
+                        <label for="tag-reasoning">Reasoning</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="tags" value="vision" id="tag-vision">
+                        <label for="tag-vision">Vision</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="tags" value="instruct" id="tag-instruct">
+                        <label for="tag-instruct">Instruct</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Torrent Information -->
+            <div class="upload-section">
+                <h2 class="section-title">Torrent Information</h2>
+
+                <div class="form-group">
+                    <label for="magnetLink">Magnet Link *</label>
+                    <textarea id="magnetLink" name="magnetLink" required placeholder="magnet:?xt=urn:btih:..."></textarea>
+                    <div class="help-text">Full magnet link including trackers</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="infoHash">Info Hash</label>
+                    <input type="text" id="infoHash" name="infoHash" placeholder="c12fe1c06bba254a9dc9f519b335aa7c1367a88a">
+                    <div class="help-text">Optional - extracted from magnet link automatically</div>
+                </div>
+
+                <div class="form-group">
+                    <label>How to create a torrent:</label>
+                    <div class="code-block">
+# Using transmission-cli<br>
+transmission-create \<br>
+  --tracker udp://tracker.opentrackr.org:1337/announce \<br>
+  --tracker udp://open.stealth.si:80/announce \<br>
+  --comment "Model description" \<br>
+  --output model.torrent \<br>
+  model.gguf<br>
+<br>
+# Extract magnet link<br>
+transmission-show model.torrent | grep "Magnet:"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verification -->
+            <div class="upload-section">
+                <h2 class="section-title">Verification</h2>
+
+                <div class="form-group">
+                    <label for="sha256">SHA256 Checksum *</label>
+                    <input type="text" id="sha256" name="sha256" required placeholder="a1b2c3d4e5f6...">
+                    <div class="help-text">Run: sha256sum model.gguf</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sourceUrl">Source URL</label>
+                    <input type="url" id="sourceUrl" name="sourceUrl" placeholder="https://huggingface.co/...">
+                    <div class="help-text">HuggingFace or original source link</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description / README</label>
+                    <textarea id="description" name="description" placeholder="Model capabilities, benchmarks, usage notes..."></textarea>
+                </div>
+            </div>
+
+            <!-- Uploader Info -->
+            <div class="upload-section">
+                <h2 class="section-title">Uploader Information</h2>
+
+                <div class="form-group">
+                    <label for="uploaderName">Your Name/Username *</label>
+                    <input type="text" id="uploaderName" name="uploaderName" required placeholder="YourUsername">
+                </div>
+
+                <div class="form-group">
+                    <label for="contactEmail">Contact Email *</label>
+                    <input type="text" id="contactEmail" name="contactEmail" required placeholder="you@example.com">
+                    <div class="help-text">For verification purposes (not displayed publicly)</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="seedCommitment" id="seedCommitment" required>
+                        <label for="seedCommitment">I commit to seeding this torrent for at least 30 days *</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="rightsConfirm" id="rightsConfirm" required>
+                        <label for="rightsConfirm">I confirm I have the right to distribute this model *</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit">Submit for Review</button>
+                <button type="button" onclick="window.location.href='index.html'" style="background: var(--bg-accent); color: var(--text-primary);">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(e.target);
+            const data = {};
+
+            // Convert FormData to object
+            for (let [key, value] of formData.entries()) {
+                if (key === 'tags') {
+                    if (!data.tags) data.tags = [];
+                    data.tags.push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+
+            // Extract info hash from magnet link if not provided
+            if (!data.infoHash && data.magnetLink) {
+                const btihMatch = data.magnetLink.match(/xt=urn:btih:([a-fA-F0-9]{40})/);
+                if (btihMatch) {
+                    data.infoHash = btihMatch[1];
+                }
+            }
+
+            // Add timestamp
+            data.submitted = new Date().toISOString();
+
+            // For now, save to localStorage (in production, this would POST to API)
+            const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+            submissions.push(data);
+            localStorage.setItem('submissions', JSON.stringify(submissions));
+
+            // Show success message
+            document.getElementById('successBox').style.display = 'block';
+            document.getElementById('uploadForm').style.display = 'none';
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+
+            console.log('Submission data:', data);
+
+            // In production, this would be:
+            // const response = await fetch('/api/submissions', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data)
+            // });
+        });
+    </script>
+</body>
+</html>

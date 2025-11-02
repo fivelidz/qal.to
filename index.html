@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Primary Meta Tags -->
+    <title>Qal.to - Decentralized AI Model Torrents</title>
+    <meta name="title" content="Qal.to - Decentralized AI Model Torrents">
+    <meta name="description" content="P2P torrent marketplace for quantized AI models. Open models, decentralized distribution, hardware optimized. Download Llama, Mistral, and more.">
+    <meta name="keywords" content="AI torrents, quantized models, P2P AI, magnet links, GGUF, Llama torrent, local AI, AI model marketplace">
+    <meta name="author" content="Qal.to">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://qal.to/">
+    <meta property="og:title" content="Qal.to - Decentralized AI Model Torrents">
+    <meta property="og:description" content="P2P torrent marketplace for quantized AI models. Open source, decentralized, hardware optimized.">
+    <meta property="og:image" content="https://qal.to/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://qal.to/">
+    <meta property="twitter:title" content="Qal.to - Decentralized AI Model Torrents">
+    <meta property="twitter:description" content="P2P torrent marketplace for quantized AI models.">
+    <meta property="twitter:image" content="https://qal.to/og-image.png">
+
+    <style>
+        @font-face {
+            font-family: 'JetBrains Mono';
+            src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2');
+            font-display: swap;
+        }
+
+        /* NERV/EVANGELION COLOR SCHEME */
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a15;
+            --bg-accent: #151520;
+            --text-primary: #e8e8e8;
+            --text-secondary: #c0c0c0;
+            --text-tertiary: #909090;
+            --accent-orange: #ff9f1c;
+            --accent-cyan: #00d9ff;
+            --accent-green: #33cc77;
+            --accent-yellow: #ffcc00;
+            --accent-red: #ff3333;
+            --border: #2a2a35;
+            --border-bright: #3a3a45;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 3px solid var(--accent-orange);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(255, 159, 28, 0.2);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "▸";
+            color: var(--accent-orange);
+            font-size: 2rem;
+        }
+
+        .search-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            background: var(--bg-accent);
+            border: 2px solid var(--accent-cyan);
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+        }
+
+        .search-bar:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 15px rgba(255, 159, 28, 0.3);
+        }
+
+        .search-bar::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: var(--accent-orange);
+            border-color: var(--accent-orange);
+            background: rgba(255, 159, 28, 0.05);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
+            border-bottom: 2px solid var(--accent-cyan);
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-left: 5px solid var(--accent-orange);
+            padding-left: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            padding-left: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-orange);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* SECTION */
+        .section {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-header::before {
+            content: "◢";
+            color: var(--accent-orange);
+            font-size: 2rem;
+        }
+
+        /* FEATURED MODELS */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .model-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-bright);
+            padding: 1.5rem;
+            clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .model-card:hover {
+            border-color: var(--accent-orange);
+            box-shadow: 0 4px 20px rgba(255, 159, 28, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .model-card::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid var(--accent-cyan);
+            border-right: 2px solid var(--accent-cyan);
+        }
+
+        .model-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .model-name {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .trust-badge {
+            padding: 0.3rem 0.7rem;
+            font-size: 0.75rem;
+            border-radius: 3px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .trust-official {
+            background: rgba(255, 159, 28, 0.2);
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+        }
+
+        .trust-verified {
+            background: rgba(51, 204, 119, 0.2);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .trust-community {
+            background: rgba(0, 217, 255, 0.2);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .model-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        .meta-value {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .seed-health {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .health-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .health-good { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+        .health-medium { background: var(--accent-yellow); box-shadow: 0 0 8px var(--accent-yellow); }
+        .health-low { background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red); }
+
+        .magnet-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-orange));
+            border: none;
+            color: #000;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+        }
+
+        .magnet-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(255, 159, 28, 0.4);
+        }
+
+        /* TORRENT TABLE */
+        .torrent-table-container {
+            overflow-x: auto;
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent-cyan);
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+        }
+
+        .torrent-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        .torrent-table thead {
+            background: var(--bg-accent);
+            border-bottom: 3px solid var(--accent-orange);
+        }
+
+        .torrent-table th {
+            padding: 1rem;
+            text-align: left;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .torrent-table th:hover {
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .torrent-table th::after {
+            content: " ▸";
+            color: var(--accent-orange);
+            opacity: 0.3;
+        }
+
+        .torrent-table tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .torrent-table tbody tr:hover {
+            background: rgba(255, 159, 28, 0.05);
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        .torrent-table td {
+            padding: 0.8rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .torrent-table .model-name-cell {
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .torrent-table .badge-cell {
+            font-size: 0.7rem;
+        }
+
+        .torrent-table .size-cell {
+            color: var(--accent-cyan);
+            font-family: monospace;
+        }
+
+        .torrent-table .seeds-cell {
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .torrent-table .downloads-cell {
+            color: var(--text-tertiary);
+        }
+
+        .torrent-table .date-cell {
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+        }
+
+        .torrent-table .magnet-cell {
+            text-align: center;
+        }
+
+        .magnet-link {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: var(--accent-orange);
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+            transition: all 0.2s;
+        }
+
+        .magnet-link:hover {
+            background: var(--accent-cyan);
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 3px solid var(--accent-orange);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-orange);
+            transform: translateX(5px);
+        }
+
+        .warrant-canary {
+            background: var(--bg-accent);
+            border: 2px solid var(--accent-green);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+        }
+
+        .warrant-canary h4 {
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .warrant-canary p {
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+        }
+
+        /* WARNING STRIPE */
+        .warning-stripe {
+            height: 20px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--accent-orange),
+                var(--accent-orange) 20px,
+                #000 20px,
+                #000 40px
+            );
+            opacity: 0.3;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .model-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.7rem;
+            }
+
+            .header-container {
+                gap: 1rem;
+            }
+
+            .torrent-table-container {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">QAL.TO</a>
+
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search models... (Llama, Mistral, Qwen...)" id="searchInput">
+            </div>
+
+            <nav>
+                <a href="#browse">Browse</a>
+                <a href="#upload">Upload</a>
+                <a href="#about">About</a>
+                <a href="https://qalarc.com" target="_blank">Hardware</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Decentralized AI Model Torrents</h1>
+            <p class="hero-subtitle">Open models. P2P distribution. Hardware optimized.</p>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">847</div>
+                    <div class="stat-label">Models</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">124K</div>
+                    <div class="stat-label">Downloads</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">2,341</div>
+                    <div class="stat-label">Active Seeders</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">18.7 TB</div>
+                    <div class="stat-label">Total Data</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="warning-stripe"></div>
+
+    <!-- FEATURED MODELS -->
+    <section class="section" id="browse">
+        <div class="section-header">
+            <h2>Featured Models</h2>
+        </div>
+
+        <div class="model-grid">
+            <!-- Model Card 1 -->
+            <div class="model-card">
+                <div class="model-header">
+                    <div class="model-name">Llama 3.1 405B</div>
+                    <div class="trust-badge trust-official">⭐ Official</div>
+                </div>
+                <div class="model-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Size</div>
+                        <div class="meta-value">231 GB</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Quant</div>
+                        <div class="meta-value">Q4_K_M</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Seeders</div>
+                        <div class="seed-health">
+                            <span class="health-indicator health-good"></span>
+                            <div class="meta-value">487</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="magnet-btn" onclick="copyMagnet('magnet:?xt=urn:btih:EXAMPLE1')">🧲 Get Magnet Link</button>
+            </div>
+
+            <!-- Model Card 2 -->
+            <div class="model-card">
+                <div class="model-header">
+                    <div class="model-name">Mistral Large 2</div>
+                    <div class="trust-badge trust-verified">🟢 Verified</div>
+                </div>
+                <div class="model-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Size</div>
+                        <div class="meta-value">83 GB</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Quant</div>
+                        <div class="meta-value">Q5_K_M</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Seeders</div>
+                        <div class="seed-health">
+                            <span class="health-indicator health-good"></span>
+                            <div class="meta-value">312</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="magnet-btn" onclick="copyMagnet('magnet:?xt=urn:btih:EXAMPLE2')">🧲 Get Magnet Link</button>
+            </div>
+
+            <!-- Model Card 3 -->
+            <div class="model-card">
+                <div class="model-header">
+                    <div class="model-name">Qwen2.5 72B</div>
+                    <div class="trust-badge trust-verified">🟢 Verified</div>
+                </div>
+                <div class="model-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Size</div>
+                        <div class="meta-value">41 GB</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Quant</div>
+                        <div class="meta-value">Q4_K_S</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Seeders</div>
+                        <div class="seed-health">
+                            <span class="health-indicator health-good"></span>
+                            <div class="meta-value">198</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="magnet-btn" onclick="copyMagnet('magnet:?xt=urn:btih:EXAMPLE3')">🧲 Get Magnet Link</button>
+            </div>
+
+            <!-- Model Card 4 -->
+            <div class="model-card">
+                <div class="model-header">
+                    <div class="model-name">DeepSeek-V2.5</div>
+                    <div class="trust-badge trust-community">🟡 Community</div>
+                </div>
+                <div class="model-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Size</div>
+                        <div class="meta-value">127 GB</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Quant</div>
+                        <div class="meta-value">Q3_K_L</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Seeders</div>
+                        <div class="seed-health">
+                            <span class="health-indicator health-medium"></span>
+                            <div class="meta-value">67</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="magnet-btn" onclick="copyMagnet('magnet:?xt=urn:btih:EXAMPLE4')">🧲 Get Magnet Link</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="warning-stripe"></div>
+
+    <!-- RECENT UPLOADS TABLE -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Recent Uploads</h2>
+        </div>
+
+        <div class="torrent-table-container">
+            <table class="torrent-table" id="torrentTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Model</th>
+                        <th onclick="sortTable(1)">Trust</th>
+                        <th onclick="sortTable(2)">Size</th>
+                        <th onclick="sortTable(3)">Quant</th>
+                        <th onclick="sortTable(4)">Seeds</th>
+                        <th onclick="sortTable(5)">Downloads</th>
+                        <th onclick="sortTable(6)">Date</th>
+                        <th>Magnet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="model-name-cell">Llama 3.1 405B Instruct</td>
+                        <td class="badge-cell"><span class="trust-badge trust-official">⭐ Official</span></td>
+                        <td class="size-cell">231 GB</td>
+                        <td>Q4_K_M</td>
+                        <td class="seeds-cell">487</td>
+                        <td class="downloads-cell">12,341</td>
+                        <td class="date-cell">2025-10-28</td>
+                        <td class="magnet-cell"><a href="#" class="magnet-link">Magnet</a></td>
+                    </tr>
+                    <tr>
+                        <td class="model-name-cell">Mistral Large 2 407B</td>
+                        <td class="badge-cell"><span class="trust-badge trust-verified">🟢 Verified</span></td>
+                        <td class="size-cell">83 GB</td>
+                        <td>Q5_K_M</td>
+                        <td class="seeds-cell">312</td>
+                        <td class="downloads-cell">8,792</td>
+                        <td class="date-cell">2025-10-27</td>
+                        <td class="magnet-cell"><a href="#" class="magnet-link">Magnet</a></td>
+                    </tr>
+                    <tr>
+                        <td class="model-name-cell">Qwen2.5 72B Instruct</td>
+                        <td class="badge-cell"><span class="trust-badge trust-verified">🟢 Verified</span></td>
+                        <td class="size-cell">41 GB</td>
+                        <td>Q4_K_S</td>
+                        <td class="seeds-cell">198</td>
+                        <td class="downloads-cell">6,543</td>
+                        <td class="date-cell">2025-10-26</td>
+                        <td class="magnet-cell"><a href="#" class="magnet-link">Magnet</a></td>
+                    </tr>
+                    <tr>
+                        <td class="model-name-cell">DeepSeek-V2.5 236B</td>
+                        <td class="badge-cell"><span class="trust-badge trust-community">🟡 Community</span></td>
+                        <td class="size-cell">127 GB</td>
+                        <td>Q3_K_L</td>
+                        <td class="seeds-cell">67</td>
+                        <td class="downloads-cell">2,187</td>
+                        <td class="date-cell">2025-10-25</td>
+                        <td class="magnet-cell"><a href="#" class="magnet-link">Magnet</a></td>
+                    </tr>
+                    <tr>
+                        <td class="model-name-cell">Llama 3.1 70B Instruct</td>
+                        <td class="badge-cell"><span class="trust-badge trust-official">⭐ Official</span></td>
+                        <td class="size-cell">39 GB</td>
+                        <td>Q4_K_M</td>
+                        <td class="seeds-cell">521</td>
+                        <td class="downloads-cell">18,921</td>
+                        <td class="date-cell">2025-10-24</td>
+                        <td class="magnet-cell"><a href="#" class="magnet-link">Magnet</a></td>
+                    </tr>
+                    <tr>
+                        <td class="model-name-cell">Mixtral 8x22B</td>
+                        <td class="badge-cell"><span class="trust-badge trust-verified">🟢 Verified</span></td>
+                        <td class="size-cell">87 GB</td>
+                        <td>Q5_K_M</td>
+                        <td class="seeds-cell">243</td>
+                        <td class="downloads-cell">9,234</td>
+                        <td class="date-cell">2025-10-23</td>
+                        <td class="magnet-cell"><a href="#" class="magnet-link">Magnet</a></td>
+                    </tr>
+                    <tr>
+                        <td class="model-name-cell">CodeLlama 70B Python</td>
+                        <td class="badge-cell"><span class="trust-badge trust-official">⭐ Official</span></td>
+                        <td class="size-cell">38 GB</td>
+                        <td>Q4_K_M</td>
+                        <td class="seeds-cell">412</td>
+                        <td class="downloads-cell">15,678</td>
+                        <td class="date-cell">2025-10-22</td>
+                        <td class="magnet-cell"><a href="#" class="magnet-link">Magnet</a></td>
+                    </tr>
+                    <tr>
+                        <td class="model-name-cell">Yi 34B Chat</td>
+                        <td class="badge-cell"><span class="trust-badge trust-verified">🟢 Verified</span></td>
+                        <td class="size-cell">19 GB</td>
+                        <td>Q4_K_S</td>
+                        <td class="seeds-cell">178</td>
+                        <td class="downloads-cell">5,432</td>
+                        <td class="date-cell">2025-10-21</td>
+                        <td class="magnet-cell"><a href="#" class="magnet-link">Magnet</a></td>
+                    </tr>
+                    <tr>
+                        <td class="model-name-cell">Phi-3.5 14B Instruct</td>
+                        <td class="badge-cell"><span class="trust-badge trust-official">⭐ Official</span></td>
+                        <td class="size-cell">8.2 GB</td>
+                        <td>Q5_K_M</td>
+                        <td class="seeds-cell">289</td>
+                        <td class="downloads-cell">11,234</td>
+                        <td class="date-cell">2025-10-20</td>
+                        <td class="magnet-cell"><a href="#" class="magnet-link">Magnet</a></td>
+                    </tr>
+                    <tr>
+                        <td class="model-name-cell">Gemma 2 27B</td>
+                        <td class="badge-cell"><span class="trust-badge trust-verified">🟢 Verified</span></td>
+                        <td class="size-cell">15 GB</td>
+                        <td>Q4_K_M</td>
+                        <td class="seeds-cell">334</td>
+                        <td class="downloads-cell">13,567</td>
+                        <td class="date-cell">2025-10-19</td>
+                        <td class="magnet-cell"><a href="#" class="magnet-link">Magnet</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="warning-stripe"></div>
+
+    <!-- FOOTER -->
+    <footer id="about">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Qal.to</h3>
+                <ul>
+                    <li><a href="#browse">Browse Models</a></li>
+                    <li><a href="#upload">Upload Torrent</a></li>
+                    <li><a href="#api">API Docs</a></li>
+                    <li><a href="#guidelines">Upload Guidelines</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="https://qalarc.com" target="_blank">Qalarc Hardware</a></li>
+                    <li><a href="https://github.com/fivelidz" target="_blank">GitHub</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#verification">Trust & Verification</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="#discord">Discord</a></li>
+                    <li><a href="#matrix">Matrix</a></li>
+                    <li><a href="#stats">Network Stats</a></li>
+                    <li><a href="#top-seeders">Top Seeders</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#dmca">DMCA Policy</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#transparency">Transparency Report</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="warrant-canary">
+            <h4>🟢 Warrant Canary - Active</h4>
+            <p>
+                As of 2025-11-02, Qal.to has not received any National Security Letters, FISA orders,
+                gag orders, or other classified requests for user information. We have not been compelled
+                to modify our code or infrastructure to enable surveillance. This canary will be updated
+                monthly. If this message is not updated or is removed, assume compromise.
+            </p>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Qal.to - Decentralized AI Model Distribution | Built on BitTorrent Protocol</p>
+            <p>No user data collected. No tracking. Pure P2P.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#torrentTable tbody tr');
+
+            rows.forEach(row => {
+                const modelName = row.querySelector('.model-name-cell').textContent.toLowerCase();
+                if (modelName.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Sort table functionality
+        function sortTable(columnIndex) {
+            const table = document.getElementById('torrentTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+
+            const sortedRows = rows.sort((a, b) => {
+                const aValue = a.cells[columnIndex].textContent.trim();
+                const bValue = b.cells[columnIndex].textContent.trim();
+
+                // Try to parse as number for size/seeds/downloads
+                const aNum = parseFloat(aValue.replace(/[^0-9.]/g, ''));
+                const bNum = parseFloat(bValue.replace(/[^0-9.]/g, ''));
+
+                if (!isNaN(aNum) && !isNaN(bNum)) {
+                    return bNum - aNum; // Descending order for numbers
+                }
+
+                return bValue.localeCompare(aValue); // Descending order for strings
+            });
+
+            // Re-append sorted rows
+            sortedRows.forEach(row => tbody.appendChild(row));
+        }
+
+        // Copy magnet link to clipboard
+        function copyMagnet(magnetLink) {
+            navigator.clipboard.writeText(magnetLink).then(() => {
+                // Show temporary feedback
+                const notification = document.createElement('div');
+                notification.textContent = 'Magnet link copied to clipboard!';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--accent-green);
+                    color: #000;
+                    padding: 1rem 2rem;
+                    font-weight: bold;
+                    z-index: 10000;
+                    border-radius: 4px;
+                    box-shadow: 0 4px 20px rgba(51, 204, 119, 0.4);
+                `;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            });
+        }
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Focus search on '/' key
+            if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+
+            // Clear search on 'Escape'
+            if (e.key === 'Escape' && document.activeElement === document.getElementById('searchInput')) {
+                document.getElementById('searchInput').value = '';
+                document.getElementById('searchInput').dispatchEvent(new Event('input'));
+            }
+        });
+    </script>
+</body>
+</html>

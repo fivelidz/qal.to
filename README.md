@@ -64,3 +64,7 @@ Every model page will include:
 ## License
 
 TBD
+
+---
+
+*Part of the [Qalarc](https://qalarc.com) ecosystem*
